@@ -327,7 +327,6 @@ func NewValidator(ctx context.Context, logger log.Logger, linksValidateConfig []
 				v.remoteLinks[response.Ctx.Get(originalURLKey)] = fmt.Errorf("remote link retry %v: %w", response.Ctx.Get(originalURLKey), err)
 				break
 			}
-			v.remoteLinks[response.Ctx.Get(originalURLKey)] = fmt.Errorf("%q rate limited even after retry; status code %v: %w", response.Request.URL.String(), response.StatusCode, err)
 		// 0 StatusCode means error on call side.
 		case http.StatusMovedPermanently, http.StatusTemporaryRedirect, http.StatusServiceUnavailable, 0:
 			if retries > 0 {
